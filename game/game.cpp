@@ -42,32 +42,30 @@ void Game::winCheck(int dx, int dy)
 {
     int xcol = 0, xrow = 0, xdiag = 0, xrdiag = 0;
     for (int i = 0; i < 3; i++)
+    {
+        if (m_map[dx][i] == m_player)
         {
-            if (m_map[dx][i] == m_player)
-            {
-                xcol++;
-                xrow++;
-                xdiag++;
-            }else if (m_map[i][dy] == m_player)
-            {
-                xrow++;
-            }else if (m_map[i][i] == m_player)
-            {
-                xdiag++;
-            } 
-        }
-        for (int i = 3; i > 0; i--)
+            xcol++;
+        }else if (m_map[i][dy] == m_player)
         {
-            if (m_map[i][i] == m_player)
-            {
-                xrdiag++;
-            } 
-        }
-        if (xcol == 3 || xrow == 3 || xdiag == 3 || xrdiag == 3)
+            xrow++;
+        }else if (m_map[i][i] == m_player)
         {
-            std::cout << " Le joueur " << m_player << " remporte la partie !" << std::endl;
-            end_game = true;
-        }
+            xdiag++;
+        } 
+    }
+    for (int i = 3; i > 0; i--)
+    {
+        if (m_map[i][i] == m_player)
+        {
+            xrdiag++;
+        } 
+    }
+    if (xcol == 3 || xrow == 3 || xdiag == 3 || xrdiag == 3)
+    {
+        std::cout << " Le joueur " << m_player << " remporte la partie !" << std::endl;
+        end_game = true;
+    }
     
     if(debug)
     {
